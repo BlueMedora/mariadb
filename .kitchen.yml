@@ -26,15 +26,15 @@ suites:
         forbid_remote_root: false
         mysqld:
           bind_address: "0.0.0.0"
-  - name: native
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
-        install:
-          prefer_os_package: true
-    includes:
-      - centos-7.2
+  #- name: native
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      install:
+  #        prefer_os_package: true
+  #  includes:
+  #    - centos-7.2
   #- name: replication
   #  run_list:
   #    - recipe[mariadb_test::replication]
