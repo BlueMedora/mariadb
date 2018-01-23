@@ -17,6 +17,7 @@ suites:
   - name: default
     run_list:
       - recipe[mariadb::default]
+      - recipe[mariadb::sys_schema]
     attributes:
       mariadb:
         use_default_repository: true
