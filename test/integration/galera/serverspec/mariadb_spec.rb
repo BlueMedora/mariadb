@@ -19,6 +19,11 @@ end
 
 describe "verify the tuning attributes set in #{mysql_config_file}" do
   {
+    'bind-address': "0.0.0.0",
+    log_output: "FILE,TABLE",
+    log_queries_not_using_indexes: 1,
+    min_examined_row_limit: 0,
+    performance_schema: "ON",
     query_cache_size: '64M',
     thread_cache_size: 128,
     max_connections: 100,
