@@ -22,6 +22,11 @@ end
 
 describe "verify the tuning attributes set in #{mysql_config_file}" do
   {
+    'bind-address': "0.0.0.0",
+    log_output: "FILE,TABLE",
+    log_queries_not_using_indexes: 1,
+    min_examined_row_limit: 0,
+    performance_schema: "ON",
     query_cache_size: '64M',
     thread_cache_size: 128,
     max_connections: 100,
@@ -29,7 +34,7 @@ describe "verify the tuning attributes set in #{mysql_config_file}" do
     max_heap_table_size: '32M',
     read_buffer_size: '2M',
     read_rnd_buffer_size: '1M',
-    long_query_time: 10,
+    long_query_time: 0,
     key_buffer_size: '128M',
     max_allowed_packet: '16M',
     sort_buffer_size: '4M',

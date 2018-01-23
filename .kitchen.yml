@@ -6,72 +6,78 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: debian-7.11
-  - name: ubuntu-12.04
-  - name: centos-6.8
+# - name: debian-7.11
+# - name: ubuntu-12.04
+# - name: centos-6.8
   - name: centos-7.2
-  - name: ubuntu-14.04
-  - name: fedora-25
+# - name: ubuntu-14.04
+# - name: fedora-25
 
 suites:
   - name: default
     run_list:
       - recipe[mariadb::default]
+      - recipe[mariadb::sys_schema]
     attributes:
       mariadb:
         use_default_repository: true
-  - name: native
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
         install:
-          prefer_os_package: true
-    includes:
-      - centos-7.0
-      - fedora-21
-  - name: replication
-    run_list:
-      - recipe[mariadb_test::replication]
-    attributes:
-      mariadb:
-        use_default_repository: true
-  - name: galera
-    run_list:
-      - recipe[mariadb::galera]
-    attributes:
-      mariadb:
-        use_default_repository: true
-  - name: datadir_changed
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
-        use_default_repository: true
+          version: "10.2"
+        server_root_password: "password"
+        forbid_remote_root: false
         mysqld:
-          datadir: /home/mysql
-  - name: port_changed
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
-        server_root_password: gsql
-        use_default_repository: true
-        mysqld:
-          port: 3307
-  - name: plugins
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
-        use_default_repository: true
-        plugins:
-          audit: true
-  - name: no_binlog 
-    run_list:
-      - recipe[mariadb::default]
-    attributes:
-      mariadb:
-        use_default_repository: true
-        replication:
-          log_bin: false
+          bind_address: "0.0.0.0"
+  #- name: native
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      install:
+  #        prefer_os_package: true
+  #  includes:
+  #    - centos-7.2
+  #- name: replication
+  #  run_list:
+  #    - recipe[mariadb_test::replication]
+  #  attributes:
+  #    mariadb:
+  #      use_default_repository: true
+  #- name: galera
+  #  run_list:
+  #    - recipe[mariadb::galera]
+  #  attributes:
+  #    mariadb:
+  #      use_default_repository: true
+  #- name: datadir_changed
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      use_default_repository: true
+  #      mysqld:
+  #        datadir: /home/mysql
+  #- name: port_changed
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      server_root_password: gsql
+  #      use_default_repository: true
+  #      mysqld:
+  #        port: 3307
+  #- name: plugins
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      use_default_repository: true
+  #      plugins:
+  #        audit: true
+  #- name: no_binlog
+  #  run_list:
+  #    - recipe[mariadb::default]
+  #  attributes:
+  #    mariadb:
+  #      use_default_repository: true
+  #      replication:
+  #        log_bin: false
