@@ -26,7 +26,7 @@ describe "verify the tuning attributes set in #{mysql_config_file}" do
     max_heap_table_size: '32M',
     read_buffer_size: '2M',
     read_rnd_buffer_size: '1M',
-    long_query_time: 10,
+    long_query_time: 0,
     key_buffer_size: '128M',
     max_allowed_packet: '16M',
     sort_buffer_size: '4M',
